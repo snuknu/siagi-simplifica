@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "spring.jpa.hibernate.dialect",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.jpa.hibernate.dialect'"
+  },
+  {
+    "name": "aplicacao.proxy.ip",
+    "type": "java.lang.String",
+    "description": "A description for 'aplicacao.proxy.ip'"
+  },
+  {
+    "name": "aplicacao.proxy.porta",
+    "type": "java.lang.String",
+    "description": "A description for 'aplicacao.proxy.porta'"
+  },
+  {
+    "name": "aplicacao.proxy.username",
+    "type": "java.lang.String",
+    "description": "A description for 'aplicacao.proxy.username'"
+  },
+  {
+    "name": "aplicacao.proxy.password",
+    "type": "java.lang.String",
+    "description": "A description for 'aplicacao.proxy.password'"
+  }
+]}
