@@ -1,0 +1,22 @@
+[
+    {
+        "cnpjEmpresaEmitente": "14807945000124",
+        "numeroDocumento": "180000010",
+        "parcela": ""
+    },
+    {
+        "cnpjEmpresaEmitente": "14807945000558",
+        "numeroDocumento": "150152256",
+        "parcela": "B"
+    },
+    {
+        "cnpjEmpresaEmitente": "14807945000558",
+        "numeroDocumento": "150152360",
+        "parcela": "B"
+    },
+    {
+        "cnpjEmpresaEmitente": "14807945000558",
+        "numeroDocumento": "150152360",
+        "parcela": "C"
+    }
+]
