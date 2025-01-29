@@ -1,10 +1,10 @@
-package com.siagi.simplifica.domain.titulo.baixado;
+package com.siagi.simplifica.domain.conta.baixada;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
-import com.siagi.simplifica.domain.titulo.TituloId;
+import com.siagi.simplifica.domain.integracao.ContaId;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -18,8 +18,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "view_boletos_baixados", catalog = "dbSIAGI_Sansuy", schema = "dbo")
-@IdClass(TituloId.class)
-public class TituloBaixado {
+@IdClass(ContaId.class)
+public class ContaBaixada {
 
   @Id
   @Column(name = "cnpj_empresa_emitente")

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.siagi.simplifica.util.info.Info;
 
 @RestController
-@RequestMapping("/info")
+@RequestMapping("info")
 public class InfoController {
 
   @GetMapping

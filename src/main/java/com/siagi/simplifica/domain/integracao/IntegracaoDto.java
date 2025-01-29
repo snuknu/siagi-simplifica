@@ -1,54 +1,23 @@
-package com.siagi.simplifica.domain.titulo;
+package com.siagi.simplifica.domain.integracao;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.Table;
-import com.siagi.simplifica.domain.titulo.pendente.TituloPendente;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"cnpjEmpresaEmitente", "numeroDocumento", "parcela"})
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "fin_simplifica_titulo", catalog = "dbSIAGI_Sansuy", schema = "dbo")
-@IdClass(TituloId.class)
-public class TituloHistorico {
+public class IntegracaoDto {
 
-  public enum Status {
-    PENDENTE_DE_ENVIO("Pendente de envio"),
-    ENVIADO("Enviado"),
-    PENDENTE_DE_BAIXA("Pendente de baixa"),
-    BAIXADO("Baixado");
-
-    private String info;
-
-    private Status(String info) {
-      this.info = info;
-    }
-
-    @Override
-    public String toString() {
-      return info;
-    }
-  }
-
-  @Id
   private String cnpjEmpresaEmitente;
-
-  @Id
   private String numeroDocumento;
-
-  @Id
   private String parcela;
 
   private Integer codigoEmpresaEmitente;
@@ -78,17 +47,18 @@ public class TituloHistorico {
   private String chaveNf;
   private Integer numeroNf;
 
-  private Status status;
+  private Integracao.Status status;
   private LocalDateTime dataEnvio;
   private String jsonRetornoEnvio;
   private LocalDateTime dataBaixa;
   private String jsonRetornoBaixa;
 
-
-  public TituloHistorico(TituloPendente entity) {
+  public IntegracaoDto(Integracao entity) {
+    
     this.cnpjEmpresaEmitente = entity.getCnpjEmpresaEmitente();
     this.numeroDocumento = entity.getNumeroDocumento();
     this.parcela = entity.getParcela();
+    
     this.codigoEmpresaEmitente = entity.getCodigoEmpresaEmitente();
     this.enderecoEmpresaEmitente = entity.getEnderecoEmpresaEmitente();
     this.razaoSocialEmpresaEmitente = entity.getRazaoSocialEmpresaEmitente();
@@ -115,7 +85,16 @@ public class TituloHistorico {
     this.percentualJuros = entity.getPercentualJuros();
     this.chaveNf = entity.getChaveNf();
     this.numeroNf = entity.getNumeroNf();
-    this.status = TituloHistorico.Status.ENVIADO;
-    this.dataEnvio = LocalDateTime.now();
+
+    this.status = entity.getStatus();
+    this.dataEnvio = entity.getDataEnvio();
+    this.jsonRetornoEnvio = entity.getJsonRetornoEnvio();
+    this.dataBaixa = entity.getDataBaixa();
+    this.jsonRetornoBaixa = entity.getJsonRetornoBaixa();
   }
+
+  public static List<IntegracaoDto> toList(List<Integracao> list) {
+    return list.stream().map(IntegracaoDto::new).collect(Collectors.toList());
+  }
+
 }

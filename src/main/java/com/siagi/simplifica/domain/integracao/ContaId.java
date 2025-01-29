@@ -1,4 +1,4 @@
-package com.siagi.simplifica.domain.titulo;
+package com.siagi.simplifica.domain.integracao;
 
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = {"cnpjEmpresaEmitente", "numeroDocumento", "parcela"})
-public class TituloId implements Serializable {
+public class ContaId implements Serializable {
 
   private static final long serialVersionUID = 1L;
 

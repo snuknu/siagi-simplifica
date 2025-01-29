@@ -12,23 +12,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.siagi.simplifica.domain.cliente.ClienteDto;
 import com.siagi.simplifica.domain.cliente.ClienteRepository;
-import com.siagi.simplifica.domain.titulo.baixado.TituloBaixadoDto;
-import com.siagi.simplifica.domain.titulo.baixado.TituloBaixadoRepository;
-import com.siagi.simplifica.domain.titulo.pendente.TituloPendenteDto;
-import com.siagi.simplifica.domain.titulo.pendente.TituloPendenteRepository;
+import com.siagi.simplifica.domain.conta.baixada.ContaBaixadaDto;
+import com.siagi.simplifica.domain.conta.baixada.ContaBaixadaRepository;
+import com.siagi.simplifica.domain.conta.pendente.ContaPendenteDto;
+import com.siagi.simplifica.domain.conta.pendente.ContaPendenteRepository;
 
 @RestController
 @RequestMapping("financeiro")
-public class FinanceiroAnaliseController {
+public class AnaliseController {
 
   @Autowired
   private ClienteRepository clienteRepository;
 
   @Autowired
-  private TituloPendenteRepository tituloPendenteRepository;
+  private ContaPendenteRepository tituloPendenteRepository;
 
   @Autowired
-  private TituloBaixadoRepository tituloBaixadoRepository;
+  private ContaBaixadaRepository tituloBaixadoRepository;
 
   @GetMapping("/cliente")
   public ResponseEntity<List<ClienteDto>> listarClientes() {
@@ -45,30 +45,30 @@ public class FinanceiroAnaliseController {
   }
 
   @GetMapping("/titulo-baixado")
-  public ResponseEntity<List<TituloBaixadoDto>> buscarTitulosBaixados() {
-    List<TituloBaixadoDto> result = tituloBaixadoRepository.findAll().stream()
-        .map(TituloBaixadoDto::new).collect(Collectors.toList());
+  public ResponseEntity<List<ContaBaixadaDto>> buscarTitulosBaixados() {
+    List<ContaBaixadaDto> result = tituloBaixadoRepository.findAll().stream()
+        .map(ContaBaixadaDto::new).collect(Collectors.toList());
     return ResponseEntity.ok(result);
   }
 
   @GetMapping("/titulo-baixado/paginar")
-  public ResponseEntity<Page<TituloBaixadoDto>> paginarTitulosBaixados(
+  public ResponseEntity<Page<ContaBaixadaDto>> paginarTitulosBaixados(
       @PageableDefault(size = 10, page = 0, sort = {"cnpjEmpresaEmitente", "numeroDocumento", "parcela"}) Pageable pageable) {
-    Page<TituloBaixadoDto> page = tituloBaixadoRepository.findAll(pageable).map(TituloBaixadoDto::new);
+    Page<ContaBaixadaDto> page = tituloBaixadoRepository.findAll(pageable).map(ContaBaixadaDto::new);
     return ResponseEntity.ok(page);
   }
 
   @GetMapping("/titulo-pendente")
-  public ResponseEntity<List<TituloPendenteDto>> list() {
-    List<TituloPendenteDto> result = tituloPendenteRepository.findAll().stream()
-        .map(TituloPendenteDto::new).collect(Collectors.toList());
+  public ResponseEntity<List<ContaPendenteDto>> buscarTitulosPendentes() {
+    List<ContaPendenteDto> result = tituloPendenteRepository.findAll().stream()
+        .map(ContaPendenteDto::new).collect(Collectors.toList());
     return ResponseEntity.ok(result);
   }
 
   @GetMapping("/titulo-pendente/paginar")
-  public ResponseEntity<Page<TituloPendenteDto>> paginate(
+  public ResponseEntity<Page<ContaPendenteDto>> paginarTitulosPendentes(
       @PageableDefault(size = 10, page = 0, sort = {"cnpjEmpresaEmitente", "numeroDocumento", "parcela"}) Pageable pageable) {
-    Page<TituloPendenteDto> page = tituloPendenteRepository.findAll(pageable).map(TituloPendenteDto::new);
+    Page<ContaPendenteDto> page = tituloPendenteRepository.findAll(pageable).map(ContaPendenteDto::new);
     return ResponseEntity.ok(page);
   }
 

@@ -1,4 +1,4 @@
-package com.siagi.simplifica.domain.titulo.baixado;
+package com.siagi.simplifica.domain.conta.baixada;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -11,13 +11,13 @@ import lombok.Setter;
 @EqualsAndHashCode(of = {"cnpjEmpresaEmitente", "numeroDocumento", "parcela"})
 @AllArgsConstructor
 @NoArgsConstructor
-public class TituloBaixadoDto {
+public class ContaBaixadaDto {
 
   private String cnpjEmpresaEmitente;
   private String numeroDocumento;
   private String parcela;
 
-  public TituloBaixadoDto(TituloBaixado entity) {
+  public ContaBaixadaDto(ContaBaixada entity) {
     this.cnpjEmpresaEmitente = entity.getCnpjEmpresaEmitente();
     this.numeroDocumento = entity.getNumeroDocumento();
     this.parcela = entity.getParcela();

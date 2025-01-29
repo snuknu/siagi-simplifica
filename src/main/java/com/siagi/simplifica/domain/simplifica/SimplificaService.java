@@ -1,4 +1,4 @@
-package com.siagi.simplifica.service.simplifica;
+package com.siagi.simplifica.domain.simplifica;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.siagi.simplifica.config.SimplificaApiFactory;
 import com.siagi.simplifica.domain.cliente.ClienteDto;
-import com.siagi.simplifica.domain.simplifica.SimplificaClienteDto;
-import com.siagi.simplifica.domain.simplifica.SimplificaDados;
 
 @Service
 public class SimplificaService {

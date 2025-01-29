@@ -1,4 +1,4 @@
-package com.siagi.simplifica.domain.titulo.pendente;
+package com.siagi.simplifica.domain.conta.pendente;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,7 +13,7 @@ import lombok.Setter;
 @EqualsAndHashCode(of = {"cnpjEmpresaEmitente", "numeroDocumento", "parcela"})
 @AllArgsConstructor
 @NoArgsConstructor
-public class TituloPendenteDto {
+public class ContaPendenteDto {
 
   private String cnpjEmpresaEmitente;
   private String numeroDocumento;
@@ -45,7 +45,7 @@ public class TituloPendenteDto {
   private String chaveNf;
   private Integer numeroNf;
 
-  public TituloPendenteDto(TituloPendente entity) {
+  public ContaPendenteDto(ContaPendente entity) {
     this.cnpjEmpresaEmitente = entity.getCnpjEmpresaEmitente();
     this.numeroDocumento = entity.getNumeroDocumento();
     this.parcela = entity.getParcela();
