@@ -20,7 +20,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"cnpjEmpresaEmitente", "numeroDocumento", "parcela"})
 @Entity
-@Table(name = "view_boletos_pendentes", catalog = "dbSIAGI_Sansuy", schema = "dbo")
+@Table(name = "vw_boletos_pendentes_teste", catalog = "dbSIAGI_Sansuy", schema = "dbo")
+//@Table(name = "view_boletos_pendentes", catalog = "dbSIAGI_Sansuy", schema = "dbo")
 @IdClass(ContaId.class)
 public class ContaPendente {
 

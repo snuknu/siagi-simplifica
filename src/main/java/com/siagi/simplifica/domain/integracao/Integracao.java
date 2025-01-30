@@ -128,9 +128,7 @@ public class Integracao {
 
 
   public Integracao(ContaPendente dto) {
-
-    this.status = Status.PENDENTE_DE_ENVIO;
-
+    
     this.cnpjEmpresaEmitente = dto.getCnpjEmpresaEmitente();
     this.numeroDocumento = dto.getNumeroDocumento();
     this.parcela = dto.getParcela();

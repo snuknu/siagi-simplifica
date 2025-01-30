@@ -25,7 +25,6 @@ public class SimplificaService {
   }
 
   public ResponseEntity<List<ClienteDto>> obterClientes() {
-
     return ResponseEntity.ok(ClienteDto.toList(simplificaApi.get(PATH_CLIENTE + pagination(DEFAULT_PAGE_INDEX, 2),
         new TypeReference<SimplificaDados<SimplificaClienteDto>>() {}).getBody().getRows()));
   }

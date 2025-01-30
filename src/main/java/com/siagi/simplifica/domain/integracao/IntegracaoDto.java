@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,9 +16,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IntegracaoDto {
-
+  
+  @NotNull
   private String cnpjEmpresaEmitente;
+  
+  @NotNull
   private String numeroDocumento;
+  
+  @NotNull
   private String parcela;
 
   private Integer codigoEmpresaEmitente;

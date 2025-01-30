@@ -17,7 +17,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "view_boletos_baixados", catalog = "dbSIAGI_Sansuy", schema = "dbo")
+@Table(name = "fin_simplifica_boletos_baixados_teste", catalog = "dbSIAGI_Sansuy", schema = "dbo")
+//@Table(name = "view_boletos_baixados", catalog = "dbSIAGI_Sansuy", schema = "dbo")
 @IdClass(ContaId.class)
 public class ContaBaixada {
 

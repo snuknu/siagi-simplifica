@@ -87,7 +87,9 @@ public class SimplificaApiFactory implements FactoryBean<RestTemplate>, Initiali
   }
 
   public <T> ResponseEntity<T> get(String servicePath, Class<T> clazz) {
+
     HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(headers);
+
     return restTemplate.exchange(
         api.getUrl(servicePath),
         HttpMethod.GET,
@@ -110,7 +112,21 @@ public class SimplificaApiFactory implements FactoryBean<RestTemplate>, Initiali
 
     return ResponseEntity.ok(obj);
   }
+  
+  public <T> ResponseEntity<T> post(String servicePath, TypeReference<T> typeReference) {
 
+    T obj = null;
+    ResponseEntity<String> response = get(servicePath, String.class);
+
+    try {
+      JsonNode root = mapper.readTree(response.getBody());
+      obj = mapper.readValue(root.toString(), typeReference);
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+    }
+
+    return ResponseEntity.ok(obj);
+  }
 }
 
 
