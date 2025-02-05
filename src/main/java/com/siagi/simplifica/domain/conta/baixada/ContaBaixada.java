@@ -1,37 +1,26 @@
 package com.siagi.simplifica.domain.conta.baixada;
-import javax.persistence.Column;
+
+import com.siagi.simplifica.domain.integracao.Conta;
+import com.siagi.simplifica.domain.integracao.ContaId;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
-import com.siagi.simplifica.domain.integracao.ContaId;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
-@EqualsAndHashCode(of = {"cnpjEmpresaEmitente", "numeroDocumento", "parcela"})
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "fin_simplifica_boletos_baixados_teste", catalog = "dbSIAGI_Sansuy", schema = "dbo")
-//@Table(name = "view_boletos_baixados", catalog = "dbSIAGI_Sansuy", schema = "dbo")
+@Table(name = "vw_boletos_baixados_teste", catalog = "dbSIAGI_Sansuy", schema = "dbo")
 @IdClass(ContaId.class)
-public class ContaBaixada {
+public class ContaBaixada extends Conta<ContaId> {
+  private static final long serialVersionUID = 1L;
 
-  @Id
-  @Column(name = "cnpj_empresa_emitente")
-  private String cnpjEmpresaEmitente;
+  public ContaBaixada(Conta<ContaId> conta) {
+    super(conta);
+  }
 
-  @Id
-  @Column(name = "numero_documento")
-  private String numeroDocumento;
-
-  @Id
-  @Column(name = "parcela")
-  private String parcela;
-
+  public static List<ContaBaixada> toList(List<Conta<ContaId>> list) {
+    return list.stream().map(ContaBaixada::new).collect(Collectors.toList());
+  }
 }

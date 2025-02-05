@@ -56,27 +56,27 @@ public class SimplificaApiFactory implements FactoryBean<RestTemplate>, Initiali
 
   public void afterPropertiesSet() {
 
-    CredentialsProvider credsProvider = new BasicCredentialsProvider();
-    credsProvider.setCredentials(
-        new AuthScope(
-            env.getProperty("aplicacao.proxy.ip"),
-            Integer.valueOf(env.getProperty("aplicacao.proxy.porta"))),
-        new UsernamePasswordCredentials(
-            env.getProperty("aplicacao.proxy.username"),
-            env.getProperty("aplicacao.proxy.password")));
-
-    HttpClientBuilder clientBuilder = HttpClientBuilder.create();
-    clientBuilder.useSystemProperties();
-    clientBuilder.setProxy(new HttpHost("10.1.10.5", 3128));
-    clientBuilder.setDefaultCredentialsProvider(credsProvider);
-    clientBuilder.setProxyAuthenticationStrategy(new ProxyAuthenticationStrategy());
-    CloseableHttpClient client = clientBuilder.build();
-
-    HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-    factory.setHttpClient(client);
+//    CredentialsProvider credsProvider = new BasicCredentialsProvider();
+//    credsProvider.setCredentials(
+//        new AuthScope(
+//            env.getProperty("aplicacao.proxy.ip"),
+//            Integer.valueOf(env.getProperty("aplicacao.proxy.porta"))),
+//        new UsernamePasswordCredentials(
+//            env.getProperty("aplicacao.proxy.username"),
+//            env.getProperty("aplicacao.proxy.password")));
+//
+//    HttpClientBuilder clientBuilder = HttpClientBuilder.create();
+//    clientBuilder.useSystemProperties();
+//    clientBuilder.setProxy(new HttpHost("10.1.10.5", 3128));
+//    clientBuilder.setDefaultCredentialsProvider(credsProvider);
+//    clientBuilder.setProxyAuthenticationStrategy(new ProxyAuthenticationStrategy());
+//    CloseableHttpClient client = clientBuilder.build();
+//
+//    HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+//    factory.setHttpClient(client);
 
     restTemplate = new RestTemplate();
-    restTemplate.setRequestFactory(factory);
+    //restTemplate.setRequestFactory(factory);
 
     api = SimplificaApiConfig.getInstance();
 

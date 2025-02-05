@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.siagi.simplifica.domain.integracao.IntegracaoDto;
+import com.siagi.simplifica.domain.integracao.ContaDto;
 import com.siagi.simplifica.domain.integracao.IntegracaoRepository;
 import com.siagi.simplifica.domain.integracao.IntegracaoService;
 
@@ -28,36 +28,36 @@ public class IntegracaoController {
   private IntegracaoRepository integracaoRepository;
 
   @PostMapping("/conta-pendente")
-  public ResponseEntity<IntegracaoDto> integrarContaPendente(@RequestBody @Valid IntegracaoDto integracaoDto) {
+  public ResponseEntity<ContaDto> integrarContaPendente(@RequestBody @Valid ContaDto integracaoDto) {
     return ResponseEntity.ok(integracaoService.integrarContaPendente(integracaoDto));
   }
 
   @GetMapping("/conta-pendente")
-  public ResponseEntity<List<IntegracaoDto>> integrarContasPendentes() {
+  public ResponseEntity<List<ContaDto>> integrarContasPendentes() {
     return ResponseEntity.ok(integracaoService.integrarContasPendentes());
   }
 
   @GetMapping("/conta-baixada")
-  public ResponseEntity<List<IntegracaoDto>> integrarContaBaixada() {
+  public ResponseEntity<List<ContaDto>> integrarContaBaixada() {
     return ResponseEntity.ok(integracaoService.integrarContasBaixadas());
   }
 
   @GetMapping("/contas-baixado")
-  public ResponseEntity<List<IntegracaoDto>> integrarContasBaixadas() {
+  public ResponseEntity<List<ContaDto>> integrarContasBaixadas() {
     return ResponseEntity.ok(integracaoService.integrarContasBaixadas());
   }
 
   @GetMapping("/conta-integrada")
-  public ResponseEntity<List<IntegracaoDto>> listarContasIntegradas() {
-    List<IntegracaoDto> result = integracaoRepository.findAll().stream()
-        .map(IntegracaoDto::new).collect(Collectors.toList());
+  public ResponseEntity<List<ContaDto>> listarContasIntegradas() {
+    List<ContaDto> result = integracaoRepository.findAll().stream()
+        .map(ContaDto::new).collect(Collectors.toList());
     return ResponseEntity.ok(result);
   }
 
   @GetMapping("/conta-integrada/paginar")
-  public ResponseEntity<Page<IntegracaoDto>> listarContasIntegradas(
+  public ResponseEntity<Page<ContaDto>> listarContasIntegradas(
       @PageableDefault(size = 10, page = 0, sort = {"codigoCliente"}) Pageable pageable) {
-    Page<IntegracaoDto> page = integracaoRepository.findAll(pageable).map(IntegracaoDto::new);
+    Page<ContaDto> page = integracaoRepository.findAll(pageable).map(ContaDto::new);
     return ResponseEntity.ok(page);
   }
 }

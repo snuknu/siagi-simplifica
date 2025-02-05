@@ -1,21 +1,18 @@
 package com.siagi.simplifica.domain.integracao;
 
+import com.siagi.simplifica.domain.conta.baixada.ContaBaixadaRepository;
+import com.siagi.simplifica.domain.conta.pendente.ContaPendente;
+import com.siagi.simplifica.domain.conta.pendente.ContaPendenteRepository;
+import com.siagi.simplifica.domain.integracao.Conta.Status;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.siagi.simplifica.domain.conta.baixada.ContaBaixadaDto;
-import com.siagi.simplifica.domain.conta.baixada.ContaBaixadaRepository;
-import com.siagi.simplifica.domain.conta.pendente.ContaPendente;
-import com.siagi.simplifica.domain.conta.pendente.ContaPendenteDto;
-import com.siagi.simplifica.domain.conta.pendente.ContaPendenteRepository;
-import com.siagi.simplifica.domain.integracao.Integracao.Status;
 
 @Service
 public class IntegracaoService {
-
   @Autowired
   private IntegracaoRepository integracaoRepository;
 
@@ -25,19 +22,17 @@ public class IntegracaoService {
   @Autowired
   private ContaBaixadaRepository contaBaixadoRepository;
 
-  /**
-   * Realiza a integração de conta pendente de envio.
-   */
-  public IntegracaoDto integrarContaPendente(IntegracaoDto dto) {
-
+  public ContaDto integrarContaPendente(ContaDto dto) {
     ContaPendente contaPendente;
     Integracao integracao = null;
 
     Optional<ContaPendente> optional = contaPendenteRepository.findById(
-        new ContaId(
-            dto.getCnpjEmpresaEmitente(),
-            dto.getNumeroDocumento(),
-            dto.getParcela()));
+      new ContaId(
+        dto.getCnpjEmpresaEmitente(),
+        dto.getNumeroDocumento(),
+        dto.getParcela()
+      )
+    );
 
     if (optional.isPresent()) {
       contaPendente = optional.get();
@@ -46,40 +41,41 @@ public class IntegracaoService {
       integracaoRepository.save(integracao);
     }
 
-    return integracao != null ? new IntegracaoDto(integracao) : null;
+    return integracao != null ? new ContaDto(integracao) : null;
   }
 
-  /**
-   * Realiza a integração de contas pendentes de envio.
-   */
-  public List<IntegracaoDto> integrarContasPendentes() {
-
+  public List<ContaDto> integrarContasPendentes() {
     List<ContaPendente> contasPendentes = contaPendenteRepository.findAll();
-    List<IntegracaoDto> list = new ArrayList<IntegracaoDto>();
+    List<ContaDto> list = new ArrayList<ContaDto>();
 
-    contasPendentes.forEach(contasPendente -> {
-      Integracao integracao = new Integracao(contasPendente);
-      integracao.setStatus(Status.PENDENTE_DE_ENVIO);
-      list.add(new IntegracaoDto(integracaoRepository.save(integracao)));
-    });
+    contasPendentes.forEach(
+      contasPendente -> {
+        Integracao integracao = new Integracao(contasPendente);
+        integracao.setStatus(Status.PENDENTE_DE_ENVIO);
+        list.add(new ContaDto(integracaoRepository.save(integracao)));
+      }
+    );
 
     return list;
   }
 
-  public IntegracaoDto integrarContaBaixada() {
-
-    List<ContaBaixadaDto> result = contaBaixadoRepository.findAll().stream()
-        .map(ContaBaixadaDto::new).collect(Collectors.toList());
-
-    return null;
-  }
-
-  public List<IntegracaoDto> integrarContasBaixadas() {
-
-    List<ContaBaixadaDto> result = contaBaixadoRepository.findAll().stream()
-        .map(ContaBaixadaDto::new).collect(Collectors.toList());
+  public ContaDto integrarContaBaixada() {
+    List<ContaDto> result = contaBaixadoRepository
+      .findAll()
+      .stream()
+      .map(ContaDto::new)
+      .collect(Collectors.toList());
 
     return null;
   }
 
+  public List<ContaDto> integrarContasBaixadas() {
+    List<ContaDto> result = contaBaixadoRepository
+      .findAll()
+      .stream()
+      .map(ContaDto::new)
+      .collect(Collectors.toList());
+
+    return null;
+  }
 }
